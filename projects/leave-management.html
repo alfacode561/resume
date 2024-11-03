@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System - Project Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --text-primary: #333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .project-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('path-to-project-image.jpg');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tech-stack span {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            display: inline-block;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back</a>
+    
+    <header class="project-header">
+        <h1>Leave Management System</h1>
+        <p>A comprehensive employee leave management solution</p>
+    </header>
+
+    <main class="project-content">
+        <section class="project-overview">
+            <h2>Project Overview</h2>
+            <p>The Leave Management System is a full-stack web application built to streamline the leave request and approval process in organizations. It provides an intuitive interface for employees to submit leave requests and for managers to process them efficiently.</p>
+        </section>
+
+        <section class="features-list">
+            <div class="feature">
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Employee leave request submission</li>
+                    <li>Manager approval workflow</li>
+                    <li>Email notifications</li>
+                    <li>Leave balance tracking</li>
+                    <li>Dashboard analytics</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h3>Technologies Used</h3>
+            <span>Python</span>
+            <span>Django</span>
+            <span>PostgreSQL</span>
+            <span>Bootstrap</span>
+            <span>JavaScript</span>
+        </section>
+
+        <section class="project-gallery">
+            <h3>Project Screenshots</h3>
+            <!-- Add project screenshots here -->
+        </section>
+
+        <section class="live-links">
+            <h3>Project Links</h3>
+            <a href="#" target="_blank">Live Demo</a>
+            <a href="#" target="_blank">GitHub Repository</a>
+        </section>
+    </main>
+</body>
+</html>
+

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard - HR Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee Dashboard - HR Management System</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            :root {
+                --primary-color: #3498db;
+                --secondary-color: #2980b9;
+                --accent-color: #2ecc71;
+                --warning-color: #f1c40f;
+                --danger-color: #e74c3c;
+                --text-primary: #2c3e50;
+                --bg-light: #f8f9fa;
+                --bg-dark: #2c3e50;
+                --office-green: #e8f5e9;
+                --accent-green: #43a047;
+                --hover-green: #2e7d32;
+                --card-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            }
+
+            body {
+                font-family: 'Inter', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: var(--office-green);
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                min-height: 100vh;
+                position: relative;
+            }
+
+            /* Employee Sidebar */
+            .sidebar {
+                background-color: var(--bg-dark);
+                color: white;
+                padding: 1rem;
+                position: fixed;
+                height: 100vh;
+                width: 250px;
+                z-index: 100;
+            }
+
+            .employee-profile {
+                text-align: center;
+                padding: 1.5rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .profile-picture {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 1rem;
+                border: 3px solid var(--accent-color);
+            }
+
+            /* Main Content Area */
+            .main-content {
+                margin-left: 250px;
+                padding: 2rem;
+                width: calc(100vw - 250px);
+                background-color: var(--office-green);
+            }
+
+            /* Quick Access Cards */
+            .quick-access {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .quick-card {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                height: 120px;
+            }
+
+            .quick-card:hover {
+                transform: translateY(-5px);
+            }
+
+            /* Leave Management Section */
+            .leave-section {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .leave-balance {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .balance-card {
+                background: var(--bg-light);
+                padding: 1rem;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            /* Attendance Section */
+            .attendance-section {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .clock-buttons {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .clock-btn {
+                padding: 1rem 2rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+            }
+
+            .clock-in {
+                background-color: var(--accent-color);
+                color: white;
+            }
+
+            .clock-out {
+                background-color: var(--danger-color);
+                color: white;
+            }
+
+            /* Payroll Section */
+            .payroll-section {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .payslip-list {
+                margin-top: 1rem;
+            }
+
+            .payslip-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            /* Navigation Menu */
+            .nav-menu {
+                list-style: none;
+                padding: 0;
+                margin-top: 2rem;
+            }
+
+            .nav-item {
+                padding: 0.8rem 1rem;
+                margin: 0.5rem 0;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .nav-item:hover {
+                background-color: rgba(255,255,255,0.1);
+            }
+
+            .nav-item i {
+                margin-right: 10px;
+                width: 20px;
+            }
+
+            /* Notifications Panel */
+            .notifications-panel {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .notification {
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .smart-leave-section {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 10px;
+                margin-bottom: 2rem;
+            }
+
+
+            .smart-features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                margin-top: 1rem;
+            }
+
+
+            .analytics-card, .heatmap-card, .forecast-card {
+                background: var(--bg-light);
+                padding: 1.5rem;
+                border-radius: 8px;
+                transition: transform 0.3s ease;
+            }
+
+
+            .analytics-card:hover, .heatmap-card:hover, .forecast-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+
+
+            .prediction-stats {
+                margin-top: 1rem;
+                padding: 1rem;
+                background: rgba(46, 204, 113, 0.1);
+                border-radius: 5px;
+            }
+
+
+            .calendar-heatmap {
+                height: 200px;
+                background: rgba(52, 152, 219, 0.1);
+                border-radius: 5px;
+                margin-top: 1rem;
+            }
+
+
+            .forecast-chart {
+                margin-top: 1rem;
+                padding: 1rem;
+                background: rgba(241, 196, 15, 0.1);
+                border-radius: 5px;
+            }
+
+            /* Tooltip Styles */
+            [data-tooltip] {
+                position: relative;
+                cursor: pointer;
+            }
+
+            [data-tooltip]:before {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 8px 12px;
+                background-color: var(--bg-dark);
+                color: white;
+                font-size: 14px;
+                border-radius: 4px;
+                white-space: nowrap;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                z-index: 1000;
+            }
+
+            [data-tooltip]:hover:before {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .features-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .feature-card {
+                background: white;
+                border-radius: 15px;
+                padding: 1.5rem;
+                text-align: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                position: relative;
+                overflow: hidden;
+                height: 200px;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+                color: var(--accent-green);
+                margin-bottom: 1rem;
+            }
+
+            .feature-title {
+                color: var(--accent-green);
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            .feature-description {
+                color: #666;
+                line-height: 1.6;
+            }
+
+            .feature-badge {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: var(--accent-green);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+            }
+
+            /* Add these styles to the existing CSS */
+            .dashboard-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                width: 100%;
+            }
+
+            .dashboard-grid-3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+
+            .compact-section {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+
+            .section-header {
+                position: sticky;
+                top: 0;
+                background: white;
+                padding: 1rem;
+                z-index: 10;
+            }
+
+            /* Scrollbar styling */
+            .compact-section::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .compact-section::-webkit-scrollbar-thumb {
+                background: var(--accent-green);
+                border-radius: 3px;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <!-- Employee Sidebar -->
+        <aside class="sidebar">
+            <div class="employee-profile">
+                <img src="employee-avatar.jpg" alt="Employee Photo" class="profile-picture">
+                <h3>Jane Smith</h3>
+                <p>Software Developer</p>
+                <p>ID: EMP001</p>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-item"><i class="fas fa-home"></i> Dashboard</div>
+                <div class="nav-item"><i class="fas fa-calendar-alt"></i> Leave Management</div>
+                <div class="nav-item"><i class="fas fa-clock"></i> Attendance</div>
+                <div class="nav-item"><i class="fas fa-money-check-alt"></i> Payroll</div>
+                <div class="nav-item"><i class="fas fa-tasks"></i> Performance</div>
+                <div class="nav-item"><i class="fas fa-file-alt"></i> Documents</div>
+                <div class="nav-item"><i class="fas fa-user-cog"></i> Profile Settings</div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Employee Dashboard</h1>
+
+            <!-- Quick Access -->
+            <div class="quick-access">
+                <div class="quick-card">
+                    <i class="fas fa-plus fa-2x"></i>
+                    <h3>Apply Leave</h3>
+                </div>
+                <div class="quick-card">
+                    <i class="fas fa-file-download fa-2x"></i>
+                    <h3>Download Payslip</h3>
+                </div>
+                <div class="quick-card">
+                    <i class="fas fa-calendar-check fa-2x"></i>
+                    <h3>Mark Attendance</h3>
+                </div>
+                <div class="quick-card">
+                    <i class="fas fa-file-upload fa-2x"></i>
+                    <h3>Upload Documents</h3>
+                </div>
+            </div>
+            
+            <section class="smart-leave-section">
+                <h2>Smart Leave Management</h2>
+                <div class="smart-features-grid">
+                    <!-- AI Analytics Dashboard -->
+                    <div class="analytics-card">
+                        <i class="fas fa-brain fa-2x"></i>
+                        <h3>AI Leave Insights</h3>
+                        <div class="prediction-stats">
+                            <p>Predicted Team Availability: 85%</p>
+                            <p>Recommended Leave Window: Aug 15-22</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Heatmap -->
+                    <div class="heatmap-card">
+                        <h3>Team Availability Heatmap</h3>
+                        <div class="calendar-heatmap">
+                            <!-- Add your heatmap visualization here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Leave Forecasting -->
+                    <div class="forecast-card">
+                        <h3>Leave Balance Forecast</h3>
+                        <div class="forecast-chart">
+                            <p>Projected Year-End Balance: 8 days</p>
+                            <p>Optimal Usage Pattern: 2 days/month</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Leave Management -->
+            <section class="leave-section">
+                <h2>Leave Management</h2>
+                <div class="leave-balance">
+                    <div class="balance-card">
+                        <h3>Annual Leave</h3>
+                        <p>12 days remaining</p>
+                    </div>
+                    <div class="balance-card">
+                        <h3>Sick Leave</h3>
+                        <p>7 days remaining</p>
+                    </div>
+                    <div class="balance-card">
+                        <h3>Casual Leave</h3>
+                        <p>5 days remaining</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attendance Section -->
+            <section class="attendance-section">
+                <h2>Today's Attendance</h2>
+                <div class="clock-buttons">
+                    <button class="clock-btn clock-in">Clock In</button>
+                    <button class="clock-btn clock-out">Clock Out</button>
+                </div>
+            </section>
+
+            <!-- Payroll Section -->
+            <section class="payroll-section">
+                <h2>Recent Payslips</h2>
+                <div class="payslip-list">
+                    <div class="payslip-item">
+                        <span>July 2023</span>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="payslip-item">
+                        <span>June 2023</span>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications -->
+            <section class="notifications-panel">
+                <h2>Notifications</h2>
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <div>
+                        <h4>Leave Request Approved</h4>
+                        <p>Your leave request for Aug 15-17 has been approved</p>
+                    </div>
+                </div>
+                <div class="notification">
+                    <i class="fas fa-calendar"></i>
+                    <div>
+                        <h4>Team Meeting</h4>
+                        <p>Upcoming team meeting on Monday at 10 AM</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

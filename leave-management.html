@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System - Project Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --text-primary: #2c3e50;
+            --hover-color: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .project-header {
+            background: linear-gradient(rgba(46, 204, 113, 0.9), rgba(39, 174, 96, 0.9)), url('path-to-project-image.jpg');
+            background-size: cover;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-stack span {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            margin: 0.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-stack span:hover {
+            background: var(--hover-color);
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: var(--hover-color);
+            transform: translateX(-5px);
+        }
+
+        .live-links a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .live-links a:hover {
+            background: var(--hover-color);
+            transform: scale(1.05);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-approved { background-color: #2ecc71; }
+        .status-pending { background-color: #f1c40f; }
+        .status-rejected { background-color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back</a>
+    
+    <header class="project-header">
+        <h1>Leave Management System</h1>
+        <p>Smart Leave Management Solution for Modern Workplaces</p>
+    </header>
+
+    <main class="project-content">
+        <section class="project-overview">
+            <h2>Project Overview</h2>
+            <p>An intelligent leave management system that revolutionizes how organizations handle employee time-off requests. Featuring AI-powered analytics and smart automation for seamless leave management.</p>
+        </section>
+
+        <section class="features-list">
+            <div class="feature">
+                <h3><i class="fas fa-star"></i> Key Features</h3>
+                <ul>
+                    <li>Smart Leave Request Processing</li>
+                    <li>AI-Powered Workload Distribution</li>
+                    <li>Real-time Leave Calendar Sync</li>
+                    <li>Automated Approval Workflows</li>
+                    <li>Advanced Analytics Dashboard</li>
+                    <li>Multi-level Approval System</li>
+                    <li>Holiday Calendar Integration</li>
+                    <li>Sick Leave Prediction Analysis</li>
+                </ul>
+            </div>
+            
+            <div class="feature">
+                <h3><i class="fas fa-rocket"></i> Unique Features</h3>
+                <ul>
+                    <li>Leave Balance Forecasting</li>
+                    <li>Team Availability Heatmap</li>
+                    <li>Mobile App Integration</li>
+                    <li>Automated Substitute Assignment</li>
+                    <li>Leave Policy Compliance Check</li>
+                    <li>Document Upload System</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h3>Technologies Used</h3>
+            <span>Python</span>
+            <span>Django</span>
+            <span>PostgreSQL</span>
+            <span>Bootstrap</span>
+            <span>JavaScript</span>
+            <span>React Native</span>
+            <span>Redis</span>
+            <span>Docker</span>
+        </section>
+
+        <section class="live-links">
+            <h3>Project Links</h3>
+            <a href="#" target="_blank"><i class="fas fa-globe"></i> Live Demo</a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub Repository</a>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('token');
+            if (!isLoggedIn) {
+                localStorage.setItem('redirectAfterLogin', window.location.pathname);
+                window.location.href = 'login.html';
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

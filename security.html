@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Features - Leave Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Add these new styles at the top of your existing CSS */
+        body {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                url('https://raw.githubusercontent.com/kali-linux/kali-artwork/master/backgrounds/kali/kali-light-16x9.png');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .security-card {
+            background: rgba(28, 28, 28, 0.95);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .security-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            border-bottom: 2px solid #00ff00;
+        }
+
+        .security-icon {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .back-button:hover {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .security-card:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            border-color: #00ff00;
+        }
+
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --text-primary: #2c3e50;
+            --hover-color: #27ae60;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .security-header {
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .security-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .security-card {
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .security-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 2px solid #00ff00;
+            transition: transform 0.3s ease;
+        }
+        
+        .certification-card:hover .cert-image {
+            transform: scale(1.05);
+        }
+        .certification-card {
+            background: rgba(28, 28, 28, 0.95);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .security-level {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .level-high {
+            background-color: #e74c3c;
+        }
+
+        .level-medium {
+            background-color: #f39c12;
+        }
+
+        .level-standard {
+            background-color: #3498db;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+                /* Add to existing CSS */
+        @keyframes matrix-flow {
+            0% { text-shadow: 0 0 10px #00ff00; }
+            50% { text-shadow: 0 0 20px #00ff00; }
+            100% { text-shadow: 0 0 10px #00ff00; }
+        }
+
+        .security-icon i {
+            animation: matrix-flow 2s infinite;
+        }
+
+        .security-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(0, 255, 0, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <a href="leave-management.html" class="back-button">← Back</a>
+    
+    <header class="security-header">
+        <h1><i class="fas fa-shield-alt"></i> Security Features</h1>
+        <p>Enterprise-grade security for your leave management system</p>
+    </header>
+
+    <main class="security-content">
+        <section class="security-grid">
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Authentication</h3>
+                <p>Multi-factor authentication with biometric support and SSO integration.</p>
+                <span class="security-level level-high">High Security</span>
+            </div>
+
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Data Protection</h3>
+                <p>End-to-end encryption for all sensitive data with AES-256 encryption standard.</p>
+                <span class="security-level level-high">High Security</span>
+            </div>
+
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Audit Trails</h3>
+                <p>Comprehensive logging of all system activities and user actions.</p>
+                <span class="security-level level-medium">Medium Security</span>
+            </div>
+
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3>Access Control</h3>
+                <p>Role-based access control with granular permissions management.</p>
+                <span class="security-level level-high">High Security</span>
+            </div>
+
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <h3>Threat Protection</h3>
+                <p>Real-time threat monitoring and automated security responses.</p>
+                <span class="security-level level-medium">Medium Security</span>
+            </div>
+
+            <div class="security-card">
+                <div class="security-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Backup & Recovery</h3>
+                <p>Automated backup systems with point-in-time recovery capabilities.</p>
+                <span class="security-level level-standard">Standard Security</span>
+            </div>
+        </section>
+        <section class="security-compliance">
+            <h2>Compliance & Certifications</h2>
+            <div class="certification-grid">
+                <div class="certification-card">
+
+
+
+
+
+                    <img src=" Ethical_Hacker_Badge20241101-27-34k7r9-1.png" alt="Certification 1" class="cert-image">
+                    <h3>Certification Title 1</h3>
+                    <span class="certification-status">Verified</span>
+                </div>
+
+                <div class="certification-card">
+
+
+
+
+
+                    <img src="path/to/certification2.jpg" alt="Certification 2" class="cert-image">
+                    <h3>Certification Title 2</h3>
+                    <span class="certification-status">Verified</span>
+                </div>
+
+                <div class="certification-card">
+
+
+
+
+
+                    <img src="path/to/certification3.jpg" alt="Certification 3" class="cert-image">
+                    <h3>Certification Title 3</h3>
+                    <span class="certification-status">Verified</span>
+                </div>
+
+                <div class="certification-card">
+
+
+
+
+
+                    <img src="path/to/certification4.jpg" alt="Certification 4" class="cert-image">
+                    <h3>Certification Title 4</h3>
+                    <span class="certification-status">Verified</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .certification-card {
+            background: rgba(28, 28, 28, 0.95);
+            border: 1px solid #00ff00;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+        }
+
+        .certification-icon {
+            font-size: 2.5rem;
+            color: #00ff00;
+            margin-bottom: 1rem;
+            animation: matrix-flow 2s infinite;
+        }
+
+        .certification-status {
+            display: inline-block;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border: 1px solid #00ff00;
+        }
+
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(0, 255, 0, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+    </style>
+</body>
+</html>
+

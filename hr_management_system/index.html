@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Management System - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --accent-color: #3498db;
+            --warning-color: #f1c40f;
+            --danger-color: #e74c3c;
+            --text-primary: #2c3e50;
+            --bg-light: #f8f9fa;
+            --bg-dark: #343a40;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+        }
+
+        /* Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--bg-dark);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            height: 100vh;
+            width: 250px;
+        }
+
+        .user-profile {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        /* Dashboard Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Notifications */
+        .notifications {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Calendar */
+        .calendar-widget {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+        }
+
+        /* Additional Components */
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .module-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="avatar-placeholder.jpg" alt="User Avatar" class="user-avatar">
+                <h3>John Doe</h3>
+                <p>HR Manager</p>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</div>
+                <div class="nav-item"><i class="fas fa-users"></i> Employees</div>
+                <div class="nav-item"><i class="fas fa-calendar-alt"></i> Leave Management</div>
+                <div class="nav-item"><i class="fas fa-clock"></i> Attendance</div>
+                <div class="nav-item"><i class="fas fa-money-bill-wave"></i> Payroll</div>
+                <div class="nav-item"><i class="fas fa-chart-bar"></i> Analytics</div>
+                <div class="nav-item"><i class="fas fa-file-alt"></i> Documents</div>
+                <div class="nav-item"><i class="fas fa-cog"></i> Settings</div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Dashboard Overview</h1>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Employees</h3>
+                    <h2>248</h2>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Employees</h3>
+                    <h2>235</h2>
+                </div>
+                <div class="stat-card">
+                    <h3>Departments</h3>
+                    <h2>12</h2>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Leaves</h3>
+                    <h2>8</h2>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h2>Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="#" class="action-button">
+                    <i class="fas fa-plus"></i>
+                    Apply for Leave
+                </a>
+                <a href="#" class="action-button">
+                    <i class="fas fa-user-plus"></i>
+                    Add Employee
+                </a>
+                <a href="#" class="action-button">
+                    <i class="fas fa-clock"></i>
+                    Mark Attendance
+                </a>
+                <a href="#" class="action-button">
+                    <i class="fas fa-file-invoice"></i>
+                    Generate Payslip
+                </a>
+            </div>
+
+            <!-- Additional Modules -->
+            <div class="module-grid">
+                <!-- Leave Management Module -->
+                <div class="module-section">
+                    <h2>Leave Management</h2>
+                    <div class="calendar-widget">
+                        <!-- Calendar implementation goes here -->
+                        <p>Leave Calendar Overview</p>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="module-section">
+                    <h2>Notifications</h2>
+                    <div class="notifications">
+                        <div class="notification-item">
+                            <i class="fas fa-bell"></i>
+                            New leave request from Jane Smith
+                        </div>
+                        <div class="notification-item">
+                            <i class="fas fa-birthday-cake"></i>
+                            3 upcoming birthdays this week
+                        </div>
+                        <div class="notification-item">
+                            <i class="fas fa-file-alt"></i>
+                            Monthly reports due in 2 days
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Charts -->
+                <div class="module-section">
+                    <h2>Analytics Overview</h2>
+                    <div class="chart-container">
+                        <!-- Charts implementation goes here -->
+                        <p>Employee Statistics & Analytics</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add your JavaScript files here -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Your JavaScript code for charts and interactions
+    </script>
+</body>
+</html>

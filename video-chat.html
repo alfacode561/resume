@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Chat Application - Project Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <a href="index.html" class="back-button">← Back</a>
+    <style>
+        :root {
+            --primary-color: #2a2a72;
+            --secondary-color: #009ffd;
+            --accent-color: #00d4ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            min-height: 100vh;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: transform 0.3s;
+            background-color: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .project-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .project-header h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .project-overview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+
+        .project-overview:hover {
+            transform: translateY(-5px);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .feature ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature ul li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature ul li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .tech-stack span {
+            background: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tech-stack span:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* Added Features */
+        .demo-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .demo-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        .stats-counter {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+        
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back</a>
+    
+    <header class="project-header">
+        <h1>Video Chat Application</h1>
+        <p>Real-time video conferencing platform</p>
+        <a href="#demo" class="demo-button">Try Live Demo</a>
+    </header>
+
+    <main class="project-content">
+        <div class="stats-counter">
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div>Active Users</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9</div>
+                <div>User Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div>Uptime</div>
+            </div>
+        </div>
+
+        <section class="project-overview">
+            <h2>Project Overview</h2>
+            <p>A WebRTC-based video chat application enabling real-time communication between multiple participants. Features include screen sharing, text chat, and room creation capabilities.</p>
+        </section>
+
+        <section class="features-list">
+            <div class="feature">
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Multi-participant video calls</li>
+                    <li>Screen sharing</li>
+                    <li>Real-time chat</li>
+                    <li>Room creation and joining</li>
+                    <li>Low-latency communication</li>
+                    <li>End-to-end encryption</li>
+                    <li>Virtual backgrounds</li>
+                    <li>Recording capabilities</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tech-stack">
+            <h3>Technologies Used</h3>
+            <span>Node.js</span>
+            <span>WebRTC</span>
+            <span>Socket.io</span>
+            <span>React</span>
+            <span>WebAssembly</span>
+            <span>Redis</span>
+        </section>
+    </main>
+</body>
+</html>
+

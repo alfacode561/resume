@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali Registration Terminal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --kali-green: #00ff00;
+            --kali-dark: #1a1a1a;
+            --terminal-font: 'Fira Code', 'Courier New', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+                        url('https://images.unsplash.com/photo-1567374783966-0991acf7d282') no-repeat center center fixed;
+            background-size: cover;
+            font-family: var(--terminal-font);
+            color: var(--kali-green);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-terminal {
+            background: rgba(0, 0, 0, 0.95);
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid var(--kali-green);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .terminal-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--kali-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27c93f; }
+
+        .terminal-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--kali-green);
+        }
+
+        .terminal-body {
+            padding: 25px;
+        }
+        .back-button {
+            color: var(--kali-green);
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .back-button:hover {
+            opacity: 0.8;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--kali-green);
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .password-toggle:hover {
+            opacity: 0.8;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            font-family: var(--terminal-font);
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            background: black;
+            padding: 0 5px;
+            font-size: 14px;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .requirement.met {
+            color: var(--kali-green);
+        }
+
+        .register-button {
+            background: transparent;
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            padding: 12px;
+            cursor: pointer;
+            font-family: var(--terminal-font);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .register-button:hover {
+            background: var(--kali-green);
+            color: black;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: #333;
+            margin-top: 5px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0;
+            background: var(--kali-green);
+            transition: width 0.3s ease;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid var(--kali-green);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--kali-green) }
+        }
+
+        .terminal-prompt {
+            color: var(--kali-green);
+            margin-bottom: 20px;
+            font-family: var(--terminal-font);
+        }
+
+        .terminal-prompt::before {
+            content: "root@kali:~# ";
+            opacity: 0.8;
+        }
+
+        .options {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .options a {
+            color: var(--kali-green);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add these styles in your existing <style> tag */
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: -300px; /* Start off-screen */
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            padding: 15px 25px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--terminal-font);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: right 0.5s ease;
+            z-index: 1000;
+            animation: glowing 2s infinite;
+        }
+
+        @keyframes glowing {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+        }
+
+        .popup.show {
+            right: 20px;
+        }
+
+        .popup i {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <span class="terminal-title">New User Registration</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-prompt typing-animation">
+                    ./create_user.sh --interactive
+                </div>
+                <form class="register-form" id="registerForm">
+                    <div class="input-group">
+                        <label>USERNAME</label>
+                        <input type="text" name="username"  title="please enter your name">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>EMAIL</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label>PASSWORD</label>
+                        <input type="password" name="password" required id="password">
+                        <i class="fas fa-eye password-toggle" data-target="password"></i>
+                        <div class="progress-bar">
+                            <div class="progress" id="passwordStrength"></div>
+                        </div>
+                        <div class="password-requirements">
+                            <div class="requirement" data-requirement="length">
+                                <i class="fas fa-circle"></i> Minimum 8 characters
+                            </div>
+                            <div class="requirement" data-requirement="uppercase">
+                                <i class="fas fa-circle"></i> One uppercase letter
+                            </div>
+                            <div class="requirement" data-requirement="lowercase">
+                                <i class="fas fa-circle"></i> One lowercase letter
+                            </div>
+                            <div class="requirement" data-requirement="number">
+                                <i class="fas fa-circle"></i> One number
+                            </div>
+                            <div class="requirement" data-requirement="special">
+                                <i class="fas fa-circle"></i> One special character
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>CONFIRM PASSWORD</label>
+                        <input type="password" name="confirmPassword" required>
+                        <i class="fas fa-eye password-toggle" data-target="confirmPassword"></i>
+                    </div>
+                    <div class="input-group">
+                        <label>SECURITY QUESTION</label>
+                        <select name="securityQuestion" required style="width: 100%; padding: 12px; background: black; color: var(--kali-green); border: 1px solid var(--kali-green);">
+                            <option value="">Select a security question</option>
+                            <option value="first_pet">What was your first pet's name?</option>
+                            <option value="birth_city">In which city were you born?</option>
+                            <option value="mother_maiden">What is your mother's maiden name?</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>ANSWER</label>
+                        <input type="text" name="securityAnswer" required>
+                    </div>
+                    
+                    <button type="submit" class="register-button">
+                        <i class="fas fa-terminal"></i> EXECUTE REGISTRATION
+                    </button>
+                </form>
+                <div class="options">
+                    <a href="login.html">Already have an account? Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this right after the container div, before the script tag -->
+    <div class="popup" id="successPopup">
+        <i class="fas fa-check-circle"></i>
+        Successfully Registered!
+    </div>
+
+    <script>
+        // Password strength checker
+        const password = document.getElementById('password');
+        const strengthBar = document.getElementById('passwordStrength');
+        const requirements = document.querySelectorAll('.requirement');
+
+        password.addEventListener('input', function() {
+            const value = this.value;
+            let strength = 0;
+            
+            // Check requirements
+            const checks = {
+                length: value.length >= 8,
+                uppercase: /[A-Z]/.test(value),
+                lowercase: /[a-z]/.test(value),
+                number: /[0-9]/.test(value),
+                special: /[^A-Za-z0-9]/.test(value)
+            };
+            
+            // Update requirement indicators
+            requirements.forEach(req => {
+                const requirement = req.dataset.requirement;
+                if(checks[requirement]) {
+                    req.classList.add('met');
+                    req.querySelector('i').className = 'fas fa-check';
+                    strength++;
+                } else {
+                    req.classList.remove('met');
+                    req.querySelector('i').className = 'fas fa-circle';
+                }
+            });
+            
+            // Update strength bar
+            strengthBar.style.width = `${(strength / 5) * 100}%`;
+        });
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button');
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            // Remove any spaces from username
+            const username = this.username.value.trim().replace(/\s+/g, '_');
+            
+            const formData = {
+                username: username, // Use the cleaned username
+                email: this.email.value,
+                password: this.password.value,
+                securityQuestion: this.securityQuestion.value,
+                securityAnswer: this.securityAnswer.value
+            };
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    button.innerHTML = '<i class="fas fa-check"></i> Registration Successful';
+                    
+                    // Show popup
+                    const popup = document.getElementById('successPopup');
+                    popup.classList.add('show');
+                    
+                    // Remove popup and redirect after delay
+                    setTimeout(() => {
+                        popup.classList.remove('show');
+                        window.location.href = 'index.html';
+                    }, 2000);
+                } else {
+                    throw new Error(data.message || 'Registration failed. Please try again.');
+                }
+            } catch (error) {
+                button.innerHTML = '<i class="fas fa-times"></i> Registration Failed';
+                // Create a more user-friendly error message
+                let errorMessage = error.message;
+                if (errorMessage.includes('User validation failed: username')) {
+                    errorMessage = 'Username is invalid. Please use only letters, numbers, underscores, or hyphens (no spaces).';
+                }
+                alert(errorMessage);
+            }
+        });
+        // Terminal button interactions
+        document.querySelectorAll('.terminal-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.classList.contains('close')) {
+                    window.location.href = 'index.html';
+                } else if (this.classList.contains('minimize')) {
+                    document.querySelector('.register-terminal').style.opacity = '0.5';
+                } else if (this.classList.contains('maximize')) {
+                    document.querySelector('.register-terminal').style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        document.querySelector('.register-terminal').style.transform = 'scale(1)';
+                    }, 200);
+                }
+            });
+        });
+
+        // Password match validation
+        const confirmPassword = document.querySelector('input[name="confirmPassword"]');
+        confirmPassword.addEventListener('input', function() {
+            if (this.value !== password.value) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Username validation with terminal-style feedback
+        const username = document.querySelector('input[name="username"]');
+        username.addEventListener('input', function() {
+            // Only allow letters, numbers, underscores, and hyphens, no spaces
+            const isValid = /^[a-zA-Z0-9_-]{3,20}$/.test(this.value);
+            
+            if (!isValid) {
+                this.style.borderColor = '#ff0000';
+                this.setCustomValidity('Username must be 3-20 characters long and can only contain letters, numbers, underscores, and hyphens. No spaces allowed.');
+            } else {
+                this.style.borderColor = 'var(--kali-green)';
+                this.setCustomValidity('');
+            }
+        });
+
+        // Terminal typing sound effect
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('keydown', () => {
+                const audio = new Audio('data:audio/wav;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAASAAAeMwAUFBQUFCIiIiIiIjAwMDAwPj4+Pj4+TExMTExZWVlZWVlnZ2dnZ3V1dXV1dYODg4ODkZGRkZGRn5+fn5+frKysrKy6urq6urrIyMjIyNbW1tbW1uTk5OTk8vLy8vLy//////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAQKAAAAAAAAHjOZTf9/AAAAAAAAAAAAAAAAAAAAAP/7kGQAAANUMEoFPeACNQV40KEYABEY41g5vAAA9RjpZxRwAImU+W8eshaFpAQgALAAYALATx/nYDYCMJ0HITQYYA7AH4c7MoGsnCMU5pnW+OQnBcDrQ9Xx7w37/D+PimYavV8elKUpT5fqx5VjV6vZ38eJR48eRKa9KUp7v396UgPHkQwMAAAAAA//8MAOp39CECAAhlIEEIIECBAgTT1oj///tEQYT0wgEIYxgDC09aIiE7u7u7uIiIz+LtoIQGE/+XAGYLjpTAIOGYYy0ZACgDgSNFxC7YYiINocwERjAEDhIy0mRoGwAE7lOTBsGhj1qrXNCU9GrgwSPr80jj0dIpT9DRUNHKJbRxiWSiifVHuD2b0EbjLkOUzSXztP3uE1JpHzV6NPq+f3P5T0/f/lNH7lWTavQ5Xz1yLVe653///qf93B7f/vMdaKJAAJAMAIwIMAHMpzDkoYwD8CR717zVb8/p54P3MikXGCEWhQOEAOAdP6v8b8oNL/EzdnROC8Zo+z+71O8VVAGIKFEglKbidkoLam0mAFiwo0ZoVExf/7kmQLgAQyZFxvPWAENcVKXeK0ABAk2WFMaSNIz');
+                audio.volume = 0.2;
+                audio.play();
+            });
+        });
+
+                // Add this to your existing script section
+        // Password toggle functionality
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const targetInput = document.querySelector(`input[name="${this.dataset.target}"]`);
+                if (targetInput.type === 'password') {
+                    targetInput.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    targetInput.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Back button functionality
+        document.querySelector('.back-button').addEventListener('click', () => {
+            window.history.back();
+        });
+
+    </script>
+</body>
+</html>

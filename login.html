@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --kali-green: #00ff00;
+            --kali-dark: #1a1a1a;
+            --terminal-font: 'Fira Code', 'Courier New', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+                        url('https://images.unsplash.com/photo-1544991875-5dc1b05f607d') no-repeat center center fixed;
+            background-size: cover;
+            font-family: var(--terminal-font);
+            color: var(--kali-green);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-terminal {
+            background: rgba(0, 0, 0, 0.9);
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--kali-green);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-header {
+            padding: 10px;
+            border-bottom: 1px solid var(--kali-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27c93f; }
+
+        .terminal-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--kali-green);
+        }
+
+        .terminal-body {
+            padding: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            font-family: var(--terminal-font);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 10px;
+            top: -10px;
+            background: black;
+            padding: 0 5px;
+        }
+
+        .command-prompt {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .prompt-symbol {
+            color: var(--kali-green);
+            margin-right: 10px;
+        }
+
+        .login-button {
+            background: transparent;
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            padding: 10px;
+            cursor: pointer;
+            font-family: var(--terminal-font);
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background: var(--kali-green);
+            color: black;
+            box-shadow: 0 0 15px var(--kali-green);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .options a {
+            color: var(--kali-green);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid var(--kali-green);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--kali-green) }
+        }
+
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            padding: 15px 25px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--terminal-font);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: right 0.5s ease;
+            z-index: 1000;
+            animation: glowing 2s infinite;
+        }
+
+        .popup.show {
+            right: 20px;
+        }
+
+        @keyframes glowing {
+            0% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+        }
+
+        .popup.error {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .popup.error i {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <span class="terminal-title">Kali Linux Terminal</span>
+            </div>
+            <div class="terminal-body">
+                <div class="command-prompt typing-animation">
+                    <span class="prompt-symbol">root@kali:~#</span>
+                    <span>./login.sh</span>
+                </div>
+                <form class="login-form" id="loginForm">
+                    <div class="input-group">
+                        <label>USERNAME</label>
+                        <input type="text" name="username" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label>PASSWORD</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="login-button">
+                        <i class="fas fa-terminal"></i> EXECUTE LOGIN
+                    </button>
+                    <div class="options">
+                        <a href="#forgot-password">Forgot Password?</a>
+                        <a href="register.html">New User? Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button');
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            
+            const formData = {
+                username: this.username.value,
+                password: this.password.value
+            };
+
+            try {
+                const BASE_URL = 'http://localhost:3000'; // Update this to match your server URL
+                const response = await fetch(`${BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Login failed. Please check your credentials.`);
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Show success popup
+                    const popup = document.createElement('div');
+                    popup.className = 'popup show';
+                    popup.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        Successfully Logged In!
+                    `;
+                    document.body.appendChild(popup);
+
+                    // Store the token
+                    localStorage.setItem('token', data.token);
+                    
+                    // Handle redirect
+                    setTimeout(() => {
+                        const redirectUrl = localStorage.getItem('redirectAfterLogin');
+                        if (redirectUrl) {
+                            localStorage.removeItem('redirectAfterLogin');
+                            window.location.href = redirectUrl;
+                        } else {
+                            window.location.href = 'index.html#projects';
+                        }
+                    }, 1500);
+                } else {
+                    throw new Error(data.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login Error:', error);
+                button.innerHTML = '<i class="fas fa-times"></i> Login Failed';
+                
+                // Show error popup
+                const popup = document.createElement('div');
+                popup.className = 'popup show error';
+                popup.innerHTML = `
+                    <i class="fas fa-times-circle"></i>
+                    ${error.message}
+                `;
+                document.body.appendChild(popup);
+                
+                setTimeout(() => {
+                    popup.remove();
+                    button.innerHTML = '<i class="fas fa-terminal"></i> EXECUTE LOGIN';
+                }, 3000);
+            }
+        });
+
+        // Add terminal typing sound effect
+        function playTypeSound() {
+            const audio = new Audio('data:audio/wav;base64,//uQRAAAAWMSLwUIYAAsYkXgoQwAEaYLWfkWgAI0wWs/ItAAAGDgYtAgAyN+QWaAAihwMWm4G8QQRDiMcCBcH3Cc+CDv/7xA4Tvh9Rz/y8QADBwMWgQAZG/ILNAARQ4GLTcDeIIIhxGOBAuD7hOfBB3/94gcJ3w+o5/5eIAIAAAVwWgQAVQ2ORaIQwEMAJiDg95G4nQL7mQVWI6GwRcfsZAcsKkJvxgxEjzFUgfHoSQ9Qq7KNwqHwuB13MA4a1q/DmBrHgPcmjiGoh//EwC5nGPEmS4RcfkVKOhJf+WOgoxJclFz3kgn//dBA+ya1GhurNn8zb//9NNutNuhz31f////9vt///z+IdAEAAAK4LQIAKobHItEIYCGAExBwe8jcToF9zIKrEdDYIuP2MgOWFSE34wYiR5iqQPj0JIeoVdlG4VD4XA67mAcNa1fhzA1jwHuTRxDUQ//iYBczjHiTJcIuPyKlHQkv/LHQUYkuSi57yQT//uggfZNajQ3Vmz+Zt//+mm3Wm3Q576v////+32///5/EOgAAADVghQAAAAA//uQZAUAB1WI0PZugAAAAAoQwAAAEk3nRd2qAAAAACiDgAAAAAAABCqEEQRLCgwpBGMlJkIz8jKhGvj4k6jzRnqasNKIeoh5gI7BJaC1A1AoNBjJgbyApVS4IDlZgDU5WUAxEKDNmmALHzZp0Fkz1FMTmGFl1FMEyodIavcCAUHDWrKAIA4aa2oCgILEBupZgHvAhEBcZ6joQBxS76AgccrFlczBvKLC0QI2cBoCFvfTDAo7eoOQInqDPBtvrDEZBNYN5xwNwxQRfw8ZQ5wQVLvO8OYU+mHvFLlDh05Mdg7BT6YrRPpCBznMB2r//xKJjyyOh+cImr2/4doscwD6neZjuZR4AgAABYAAAABy1xcdQtxYBYYZdifkUDgzzXaXn98Z0oi9ILU5mBjFANmRwlVJ3/6jYDAmxaiDG3/6xjQQCCKkRb/6kg/wW+kSJ5//rLobkLSiKmqP/0ikJuDaSaSf/6JiLYLEYnW/+kXg1WRVJL/9EmQ1YZIsv/6Qzwy5qk7/+tEU0nkls3/zIUMPKNX/6yZLf+kFgAfgGyLFAUwY//uQZAUABcd5UiNPVXAAAApAAAAAE0VZQKw9ISAAACgAAAAAVQIygIElVrFkBS+Jhi+EAuu+lKAk9MfhrSzmhIlhRlI2UHf0ZJBwf59s9wk/5qieqvAs4lpz2jR9qbBjaMNlvBp/6s=');
+            audio.volume = 0.2;
+            audio.play();
+        }
+
+        // Add typing sound to inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keydown', playTypeSound);
+        });
+
+        // Add matrix rain effect
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '-1';
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const columns = Math.floor(width / 20);
+        const drops = new Array(columns).fill(0);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = '15px monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = String.fromCharCode(Math.random() * 128);
+                ctx.fillText(text, i * 20, drops[i] * 20);
+                
+                if(drops[i] * 20 > height && Math.random() > 0.975)
+                    drops[i] = 0;
+                
+                drops[i]++;
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Start animation
+        setInterval(drawMatrix, 50);
+
+        // Add password strength indicator
+        const passwordInput = document.querySelector('input[type="password"]');
+        const strengthIndicator = document.createElement('div');
+        strengthIndicator.style.height = '3px';
+        strengthIndicator.style.marginTop = '5px';
+        strengthIndicator.style.transition = 'all 0.3s';
+        passwordInput.parentElement.appendChild(strengthIndicator);
+
+        passwordInput.addEventListener('input', (e) => {
+            const strength = checkPasswordStrength(e.target.value);
+            const colors = {
+                0: '#ff0000',
+                1: '#ff6600',
+                2: '#ffff00',
+                3: '#00ff00'
+            };
+            strengthIndicator.style.background = colors[strength];
+            strengthIndicator.style.width = `${(strength + 1) * 25}%`;
+        });
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            if(password.length >= 8) strength++;
+            if(password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if(password.match(/\d/)) strength++;
+            if(password.match(/[^a-zA-Z\d]/)) strength++;
+            return Math.min(strength, 3);
+        }
+
+        // Add loading animation
+        function showLoading() {
+            const terminal = document.querySelector('.terminal-body');
+            const loadingText = document.createElement('div');
+            loadingText.className = 'loading-text';
+            loadingText.innerHTML = `
+                <span class="prompt-symbol">root@kali:~#</span>
+                <span class="typing-animation">Authenticating...</span>
+            `;
+            terminal.appendChild(loadingText);
+        }
+    </script>
+</body>
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ICT Professional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --kali-green: #00ff00;
+            --kali-dark: #1a1a1a;
+            --kali-text: #00ff00;
+            --terminal-font: 'Fira Code', 'Courier New', monospace;
+        }
+
+        body {
+            background-color: var(--kali-dark);
+            font-family: var(--terminal-font);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--kali-green);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            color: var(--kali-green);
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--kali-green);
+        }
+
+        .form-group {
+            position: relative;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        input {
+
+
+            width: 90%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 1px solid var(--kali-green);
+            background: transparent;
+            border-radius: 5px;
+            color: var(--kali-green);
+            font-family: var(--terminal-font);
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        button {
+            background: transparent;
+            color: var(--kali-green);
+            border: 1px solid var(--kali-green);
+            padding: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--terminal-font);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--kali-green);
+            color: var(--kali-dark);
+            box-shadow: 0 0 15px var(--kali-green);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--kali-green);
+        }
+
+        .form-footer a {
+            color: var(--kali-green);
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--kali-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2><i class="fas fa-terminal"></i> Login</h2>
+        </div>
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <button type="submit">LOGIN</button>
+            <div class="form-footer">
+                <a href="#forgot-password">Forgot Password?</a>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+                <a href="index.html">Back to Home</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Add your login logic here
+            console.log('Login attempt:', { email, password });
+        });
+    </script>
+</body>
+</html>
