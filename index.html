@@ -435,11 +435,43 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
+        .project-card {
+            cursor: pointer;
+        }
+        
         
         .terminal-button:hover {
             background: var(--kali-green);
             color: black;
+          
+                /* Add this inside your existing <style> tag */
+        @media (max-width: 768px) {
+            .about-content {
+                padding: 1rem;
+                margin: 0 1rem;
+            }
+
+            .about-content p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                text-align: left;
+                padding: 0 0.5rem;
+            }
+
+            .social-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .social-links a {
+                font-size: 1.3rem;
+            }
         }
+
     </style>
     
 </head>
@@ -471,7 +503,7 @@
     <section id="hero" class="hero-section">
         <div class="hero-content">
             <img src="/src/assets/images/profile-pic.jpg" alt="Professional Photo" class="profile-image">
-            <h2>Aspiring ICT Professional</h2>
+            <h2>ICT Professional</h2>
             <p>Software Development | System Support | Network Administration | Security Resercher</p>
             <a href="Curriculum Vitae.pdf" class="cta-button" download>Download Resume</a>
         </div>
@@ -651,6 +683,7 @@
                     </div>
                     <div class="project-links">
                         <a href="leave-management.html" class="terminal-button">View Details</a>
+
                         <a href="#" class="terminal-button">GitHub <i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -766,7 +799,41 @@
                     });
                 });
             });
-
+            document.addEventListener('DOMContentLoaded', () => {
+                // Login button handler
+                const loginButton = document.querySelector('.auth-button.login');
+                loginButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            
+                // Project cards handlers
+                const projectCards = document.querySelectorAll('.project-card');
+                projectCards.forEach((card, index) => {
+                    const projectLinks = card.querySelectorAll('.terminal-button');
+                    
+                    // Add click handlers only to the "View Details" buttons
+                    projectLinks.forEach(link => {
+                        if (link.textContent.includes('View Details')) {
+                            link.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                switch (index) {
+                                    case 0:
+                                        window.location.href = 'leave-management.html';
+                                        break;
+                                    case 1:
+                                        window.location.href = 'video-chat.html';
+                                        break;
+                                    case 2:
+                                        window.location.href = 'security.html';
+                                        break;
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+            
             // Back to top button functionality
             const backToTopButton = document.getElementById('back-to-top');
             
@@ -849,39 +916,40 @@
                 `;
                 return modal;
             }
-            // Add click handlers to project cards
-            document.querySelectorAll('.project-card').forEach(card => {
+            // Replace the existing project click handlers with this code
+            const projectCards = document.querySelectorAll('.project-card');
+            // Replace this event handler code:
+            projectCards.forEach((card, index) => {
                 card.addEventListener('click', () => {
-                    const isLoggedIn = localStorage.getItem('token');
-                    const projectTitle = card.querySelector('.typing-text').textContent;
-                    
-                    // If not logged in, store the current project and redirect to login
-                    if (!isLoggedIn) {
-                        localStorage.setItem('redirectAfterLogin', window.location.href + '#' + projectTitle.toLowerCase().replace(/\s+/g, '-'));
-                        window.location.href = 'login.html';
-                        return;
-                    }
-                    
-                    // If logged in, navigate to the appropriate project page
-                    let targetUrl;
-                    switch(projectTitle) {
-                        case 'Leave Management System':
-                            targetUrl = 'leave-management.html';
+                    switch (index) {
+                        case 0:
+                            window.location.href = 'leave-management.html';
                             break;
-                        case 'Video Chat Application':
-                            targetUrl = 'video-chat.html';
+                        case 1:
+                            window.location.href = 'video-chat.html';
                             break;
-                        case 'Cybersecurity Tool Suite':
-                            targetUrl = 'security.html';
+                        case 2:
+                            window.location.href = 'security.html';
                             break;
                         default:
-                            targetUrl = 'index.html#projects';
+                            console.log('Project page not yet implemented');
                     }
-                    
-                    window.location.href = targetUrl;
                 });
             });
 
+            // With this code that prevents navigation:
+            projectCards.forEach((card) => {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // You can add custom behavior here, like:
+                    console.log('Project card clicked');
+                    // Or show project details in the same page
+                });
+            });
+
+
+            
+                      
             // Assuming you have a function to send the message to the database
             function sendMessageToDatabase(message) {
                 // Code to send message to the database
@@ -932,7 +1000,6 @@
     </script>
 </body>
 </html>
- 
 
 
 
