@@ -201,9 +201,39 @@
         .popup.error i {
             color: #ff0000;
         }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: 1px solid var(--kali-green);
+            color: var(--kali-green);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--terminal-font);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            background: var(--kali-green);
+            color: black;
+            box-shadow: 0 0 15px var(--kali-green);
+        }
+        
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+    
     <div class="container">
         <div class="login-terminal">
             <div class="terminal-header">
@@ -233,7 +263,7 @@
                     </button>
                     <div class="options">
                         <a href="#forgot-password">Forgot Password?</a>
-                        <a href="register.html">New User? Register</a>
+                        <!-- <a href="register.html">New User? Register</a> -->
                     </div>
                 </form>
             </div>
@@ -412,3 +442,33 @@
     </script>
 </body>
 
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: 1px solid var(--kali-green);
+    color: var(--kali-green);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--terminal-font);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background: var(--kali-green);
+    color: black;
+    box-shadow: 0 0 15px var(--kali-green);
+}
+
+<a href="index.html" class="back-button">
+    <i class="fas fa-arrow-left"></i>
+    Back to Home
+</a>

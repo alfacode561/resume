@@ -432,7 +432,38 @@
                     throw new Error(data.message || 'Registration failed. Please try again.');
                 }
             } catch (error) {
-                button.innerHTML = '<i class="fas fa-times"></i> Registration Failed';
+           // Add this validation before form submission
+if (password.value !== confirmPassword.value) {
+    alert('Passwords do not match!');
+    button.innerHTML = '<i class="fas fa-terminal"></i> EXECUTE REGISTRATION';
+    return;
+}try {
+    const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    // Rest of the success handling
+} catch (error) {
+    console.error('Registration error:', error);
+    button.innerHTML = '<i class="fas fa-times"></i> Registration Failed';
+    alert(`Registration failed: ${error.message}`);
+}const response = await fetch('http://localhost:3000/users', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+});     button.innerHTML = '<i class="fas fa-times"></i> Registration Failed';
                 // Create a more user-friendly error message
                 let errorMessage = error.message;
                 if (errorMessage.includes('User validation failed: username')) {
