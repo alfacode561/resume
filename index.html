@@ -471,6 +471,8 @@
                 font-size: 1.3rem;
             }
         }
+        
+     
 
     </style>
     
@@ -611,6 +613,161 @@
             <!-- Add more testimonial cards -->
         </div>
     </section>
+    <!-- Add this section where you want the certifications to appear -->
+    <section id="certifications" class="security-compliance">
+        <h2>Compliance & Certifications</h2>
+        <div class="certification-grid">
+        <div class="certification-card">
+            <img src="assets/images/Ethical_Hacker_Badge20241101-27-34k7r9-1.png" alt="Ethical Hacker Certification" class="cert-image">
+            <h3>Cisco Certified Ethical Hacker</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+    
+        <div class="certification-card">
+            <img src="assets/images/Alison_Certificate-3574-40678001.png" alt="Linux Security Certification" class="cert-image">
+            <h3>Guide to Security For Linux Systems</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+    
+        <div class="certification-card">
+            <img src="assets/images/Amos-Mwangi-Cybersecurity-and-Emerging-Technologies-Awareness-Training-IBM-Certificate-Digital-Skills-Training.png" alt="IBM Cybersecurity Certification" class="cert-image">
+            <h3>Cybersecurity and Emerging Technologies</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+    
+        <div class="certification-card">
+            <img src="assets/images/Cybersecurity_Fundamentals_Badge20240701-7-clsfat-1.png" alt="Cybersecurity Fundamentals" class="cert-image">
+            <h3>Cybersecurity Fundamentals</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+    
+        <div class="certification-card">
+            <img src="assets/images/7533323_77257821730985906771-1.png" alt="AI Certification" class="cert-image">
+            <h3>Introduction to Artificial Intelligence</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+    
+        <div class="certification-card">
+            <img src="assets/images/260_3_6612321_1730973629_AWS Course Completion Certificate-1.png" alt="Machine Learning Certification" class="cert-image">
+            <h3>Machine Learning Terminology and Process</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+        </div>
+    
+        <style>
+        .security-compliance {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+    
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+    
+        .certification-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+    
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+    
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+    
+        .certification-card h3 {
+            color: #2d3748;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+    
+        .certification-status {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            animation: slideIn 0.5s ease-out;
+        }
+    
+        @keyframes fadeIn {
+            from {
+            opacity: 0;
+            transform: translateY(20px);
+            }
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+    
+        @keyframes scaleIn {
+            from {
+            transform: scale(0.8);
+            opacity: 0;
+            }
+            to {
+            transform: scale(1);
+            opacity: 1;
+            }
+        }
+    
+        @keyframes slideIn {
+            from {
+            transform: translateX(-20px);
+            opacity: 0;
+            }
+            to {
+            transform: translateX(0);
+            opacity: 1;
+            }
+        }
+        .security-compliance {
+            padding: 4rem 2rem;
+            background-image: url('assets/images/kali-linux.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        /* Add an overlay to ensure text remains readable */
+        .security-compliance::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+        
+        /* Ensure content stays above the overlay */
+        .security-compliance > * {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+        }
+        
+        </style>
+    </section>
+  
 
     <!-- Dark Mode Toggle Button -->
     <button class="theme-toggle" id="theme-toggle">
@@ -638,6 +795,8 @@
             <p class="duration">04-08-1024</p>
         </div>
     </section>
+    <!-- Replace your existing certification section with this -->
+
 
     <!-- Projects Section -->
     <section id="projects" class="projects-section">
