@@ -617,6 +617,7 @@
     <section id="certifications" class="security-compliance">
         <h2>Compliance & Certifications</h2>
         <div class="certification-grid">
+        
         <div class="certification-card">
             <img src="assets/images/Ethical_Hacker_Badge20241101-27-34k7r9-1.png" alt="Ethical Hacker Certification" class="cert-image">
             <h3>Cisco Certified Ethical Hacker</h3>
@@ -640,6 +641,7 @@
             <h3>Cybersecurity Fundamentals</h3>
             <span class="certification-status">Verified</span>
         </div>
+      
     
         <div class="certification-card">
             <img src="assets/images/7533323_77257821730985906771-1.png" alt="AI Certification" class="cert-image">
@@ -652,9 +654,26 @@
             <h3>Machine Learning Terminology and Process</h3>
             <span class="certification-status">Verified</span>
         </div>
+        <div class="certification-card">
+            <img src="assets/images/linux_unhatched.png" alt="Linux Unhatched" class="cert-image">
+            <h3>Linux Unhatched</h3>
+            <span class="certification-status">Verified</span>
+        </div>
+        
+        <div class="certification-card">
+            <img src="assets/images/Cyber_Threat_Management_Badge20241113-26-wr9670-1.png" alt="Cyber Threat Management" class="cert-image">
+            <h3>Cyber Threat Management</h3>
+            <span class="certification-status">Verified</span>
         </div>
     
+        
+            <!-- Existing certification cards -->
+            
+            
+        </div>
         <style>
+          
+            
         .security-compliance {
             padding: 4rem 2rem;
             background: #f8f9fa;
@@ -764,6 +783,123 @@
             z-index: 2;
             color: #ffffff;
         }
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+        
+        .certification-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid var(--kali-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--kali-green);
+        }
+        
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--kali-green);
+        }
+        
+        @media (max-width: 1200px) {
+            .certification-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .certification-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .certification-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .certification-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid var(--kali-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1.5rem;
+        }
+        
+        .cert-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+        .certification-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: rgba(26, 26, 26, 0.95);
+        border: 1px solid var(--kali-green);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 1.5rem;
+        min-height: 400px; /* Ensures consistent height */
+    }
+
+    .cert-image {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .certification-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid var(--kali-green);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
+    min-height: 400px; /* Ensures consistent height */
+}
+
+.cert-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+  
+        
         
         </style>
     </section>
