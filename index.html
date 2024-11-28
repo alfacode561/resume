@@ -470,7 +470,46 @@
             .social-links a {
                 font-size: 1.3rem;
             }
+            .services-section {
+                padding: 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .service-card {
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            .service-card h3 {
+                color: #0a66c2;
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+            
+            .service-card ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            
+            .service-card ul li {
+                padding: 0.5rem 0;
+                color: #333;
+                font-size: 1rem;
+            }
+            
+            .service-card:hover {
+                transform: translateY(-2px);
+                transition: transform 0.2s ease;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            }
+
         }
+            
         
      
 
@@ -601,9 +640,43 @@
             </div>
         </div>
 
+        </section>
+        <section class="services-section">
+        <h2>Professional Services</h2>
+        
+        <div class="service-card">
+            <h3>Cybersecurity Consulting</h3>
+            <ul>
+                <li>Security Assessments & Audits</li>
+                <li>Penetration Testing</li>
+                <li>Vulnerability Management</li>
+                <li>Security Policy Development</li>
+            </ul>
+        </div>
+    
+        <div class="service-card">
+            <h3>Network Architecture & Security</h3>
+            <ul>
+                <li>Network Design & Implementation</li>
+                <li>Security Infrastructure Setup</li>
+                <li>Firewall Configuration</li>
+                <li>Network Monitoring Solutions</li>
+            </ul>
+        </div>
+    
+        <div class="service-card">
+            <h3>Training & Capacity Building</h3>
+            <ul>
+                <li>Security Awareness Training</li>
+                <li>Technical Staff Training</li>
+                <li>Certification Preparation</li>
+                <li>Best Practices Workshops</li>
+            </ul>
+        </div>
     </section>
 
-    <!-- Testimonials Section -->
+
+    <!-- Testimonials Section 
     <section id="testimonials" class="testimonials-section">
         <h2>Testimonials</h2>
         <div class="testimonials-carousel">
