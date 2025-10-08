@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Understanding Zero-Day Vulnerabilities | Amos Mwangi</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    background-color: #0a0a0a;
+    color: #00ff66;
+    background-image: radial-gradient(#003300 1px, #0a0a0a 1px);
+    background-size: 20px 20px;
+  }
+
+  header {
+    text-align: center;
+    padding: 25px;
+    border-bottom: 1px solid #00ff66;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #00ff66;
+  }
+  header p {
+    margin: 5px 0;
+    color: #00cc44;
+  }
+  nav {
+    margin-top: 10px;
+  }
+  nav a {
+    color: #00ff66;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #00cc44;
+    text-shadow: 0 0 8px #00ff66;
+  }
+
+  .hero {
+    width: 100%;
+    height: 300px;
+    background-image: url('https://source.unsplash.com/1200x500/?cybersecurity,hacker');
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #00ff66;
+  }
+
+  .content {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.7em;
+  }
+
+  .meta {
+    font-size: 0.9em;
+    color: #00cc44;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: #00ff66;
+    margin-top: 30px;
+    text-shadow: 0 0 5px #00ff66;
+  }
+
+  code, pre {
+    display: block;
+    background-color: rgba(0, 255, 102, 0.05);
+    border-left: 3px solid #00ff66;
+    padding: 10px;
+    color: #00ffcc;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+
+  .quote {
+    border-left: 3px solid #00ff66;
+    padding-left: 15px;
+    color: #00ffaa;
+    font-style: italic;
+  }
+
+  .related {
+    margin-top: 50px;
+    border-top: 1px solid #00ff66;
+    padding-top: 20px;
+  }
+
+  .related h3 {
+    margin-bottom: 15px;
+    color: #00ff66;
+  }
+
+  .related-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .related-post {
+    border: 1px solid #00ff66;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 102, 0.05);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .related-post:hover {
+    box-shadow: 0 0 15px #00ff66;
+    transform: scale(1.02);
+  }
+
+  .related-post img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #00ff66;
+  }
+
+  .related-post h4 {
+    margin: 10px;
+    color: #00ff66;
+  }
+
+  .author-box {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 255, 102, 0.05);
+    border: 1px solid #00ff66;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 40px;
+  }
+
+  .author-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #00ff66;
+    margin-right: 20px;
+  }
+
+  .author-info h3 {
+    margin: 0;
+    color: #00ff66;
+  }
+  .author-info p {
+    margin-top: 5px;
+    color: #b3ffcc;
+  }
+
+  .comments {
+    margin-top: 50px;
+  }
+
+  .comments h3 {
+    color: #00ff66;
+  }
+
+  .comment-box {
+    margin-top: 15px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+    color: #00ff66;
+    border: 1px solid #00ff66;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+  }
+
+  button {
+    margin-top: 10px;
+    background-color: #00ff66;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #00cc44;
+  }
+
+  .comment {
+    margin-top: 15px;
+    border-left: 3px solid #00ff66;
+    padding-left: 10px;
+    color: #b3ffcc;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #00ff66;
+    color: #00cc44;
+    font-size: 0.9em;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    header h1 {
+      font-size: 1.6em;
+    }
+    .author-box {
+      flex-direction: column;
+      text-align: center;
+    }
+    .author-box img {
+      margin-bottom: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Amos Mwangi</h1>
+  <p>&lt; Cybersecurity Professional | Security Researcher | Systems Architect &gt;</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="hero"></div>
+
+<div class="content">
+  <h2>> Understanding Zero-Day Vulnerabilities</h2>
+  <p class="meta">Posted on October 7, 2025 | Category: Exploit Analysis | 6 min read</p>
+
+  <p>Zero-day vulnerabilities are among the most dangerous forms of cyber threats because they exploit flaws unknown to software vendors. These attacks occur before patches are available — giving hackers a unique window to infiltrate systems undetected.</p>
+
+  <h2>What is a Zero-Day?</h2>
+  <p>A zero-day refers to a software vulnerability that’s discovered by attackers before developers have had a chance to fix it. The “zero” represents the number of days the vendor has had to patch the flaw.</p>
+
+  <pre><code>
+# Example Attack Scenario
+1. Hacker discovers a flaw in a web application.
+2. Creates an exploit that bypasses authentication.
+3. Deploys the payload to gain remote access.
+4. Maintains persistence through privilege escalation.
+  </code></pre>
+
+  <h2>How Hackers Exploit It</h2>
+  <p>Hackers often use zero-days in targeted attacks, particularly against critical infrastructure, government systems, or corporations with valuable data. Exploits are sold in underground markets for millions of dollars.</p>
+
+  <div class="quote">> “A single unpatched vulnerability is all it takes to compromise an empire.”</div>
+
+  <h2>Defense & Mitigation</h2>
+  <p>Defending against zero-day threats requires a combination of proactive and reactive measures, including:</p>
+  <ul>
+    <li>Regular vulnerability scanning</li>
+    <li>Network segmentation and strict access control</li>
+    <li>Behavior-based intrusion detection systems</li>
+    <li>Threat intelligence integration</li>
+  </ul>
+
+  <h2>Real-World Examples</h2>
+  <p>Notable incidents include the <b>Stuxnet worm</b> (targeting Iran’s nuclear program) and exploits used by groups like <b>APT28</b> and <b>Equation Group</b>. Each demonstrated how devastating unpatched vulnerabilities can be.</p>
+
+  <h2>Conclusion</h2>
+  <p>Zero-days represent the cutting edge of cyber warfare — unseen, unpredictable, and often unstoppable. The best defense is continuous monitoring, rapid patch management, and a strong security culture.</p>
+
+  <div class="related">
+    <h3>> Related Posts</h3>
+    <div class="related-posts">
+      <div class="related-post" onclick="location.href='blog2.html'">
+        <img src="https://source.unsplash.com/600x400/?linux,security" alt="Linux">
+        <h4>Mastering Linux Security Tools</h4>
+      </div>
+      <div class="related-post" onclick="location.href='blog3.html'">
+        <img src="https://source.unsplash.com/600x400/?network,firewall" alt="Network">
+        <h4>Securing Modern Networks</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="author-box">
+    <img src="https://amosmwangiceh.com/images/profile.jpg" alt="Amos Mwangi">
+    <div class="author-info">
+      <h3>Amos Mwangi Njuguna</h3>
+      <p>Systems Architecture, Networking  &  Security.</p>
+      <p><a href="https://amosmwangiceh.com" style="color:#00cc44;">Visit my website →</a></p>
+    </div>
+  </div>
+
+  <div class="comments">
+    <h3>> Comments</h3>
+    <div class="comment-box">
+      <textarea id="commentInput" placeholder="Leave a comment..."></textarea>
+      <button onclick="addComment()">Post Comment</button>
+    </div>
+    <div id="commentSection"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Amos Mwangi | Hacker-Themed Blog Interface
+</footer>
+
+<script>
+function addComment() {
+  const commentInput = document.getElementById('commentInput');
+  const commentText = commentInput.value.trim();
+  if (commentText === "") return alert("Enter a comment first.");
+  const commentSection = document.getElementById('commentSection');
+  const commentDiv = document.createElement('div');
+  commentDiv.className = 'comment';
+  const date = new Date().toLocaleString();
+  commentDiv.innerHTML = `<p><b>Anonymous</b> (${date}):<br>${commentText}</p>`;
+  commentSection.prepend(commentDiv);
+  commentInput.value = "";
+}
+</script>
+</body>
+</html>
+

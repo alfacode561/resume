@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amos Mwangi | Blog</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Courier New", monospace;
+      background-color: #0a0a0a;
+      color: #00ff66;
+      background-image: radial-gradient(#003300 1px, #0a0a0a 1px);
+      background-size: 20px 20px;
+    }
+    header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #00ff66;
+    }
+    header h1 {
+      color: #00ff66;
+      font-size: 2em;
+      margin: 0;
+    }
+    header p {
+      color: #00cc44;
+      margin-top: 5px;
+    }
+    .blog-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .blog {
+      border: 1px solid #00ff66;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: rgba(0, 255, 102, 0.05);
+    }
+    .blog:hover {
+      box-shadow: 0 0 20px #00ff66;
+      transform: scale(1.02);
+    }
+    .blog img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #00ff66;
+    }
+    .blog-content {
+      padding: 15px;
+    }
+    .blog-content h2 {
+      color: #00ff66;
+      font-size: 1.3em;
+      margin: 10px 0;
+    }
+    .blog-content p {
+      color: #b3ffcc;
+      font-size: 0.9em;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #00ff66;
+      color: #00cc44;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Amos Mwangi</h1>
+    <h2> All Blogs Will Appear here</h2>
+    <p>&lt; Cybersecurity Professional / Security Researcher / Systems Architect &gt;</p>
+  </header>
+
+  <section class="blog-container">
+    <div class="blog" onclick="openBlog('blog1.html')">
+      <img src="https://source.unsplash.com/600x400/?cybersecurity,hacker" alt="Cybersecurity">
+      <div class="blog-content">
+        <h2>Understanding Zero-Day Vulnerabilities</h2>
+        <p>Explore how zero-day exploits are discovered, analyzed, and mitigated in real-world scenarios.</p>
+      </div>
+    </div>
+
+    <div class="blog" onclick="openBlog('blog2.html')">
+      <img src="https://source.unsplash.com/600x400/?coding,terminal" alt="Coding">
+      <div class="blog-content">
+        <h2>Mastering Linux Security Tools</h2>
+        <p>A practical guide to using Kali Linux and open-source tools for penetration testing.</p>
+      </div>
+    </div>
+
+    <div class="blog" onclick="openBlog('blog3.html')">
+      <img src="https://source.unsplash.com/600x400/?network,firewall" alt="Network">
+      <div class="blog-content">
+        <h2>Securing Modern Networks</h2>
+        <p>Learn about network segmentation, intrusion detection systems, and advanced network defenses.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Amos Mwangi | Hacker-Themed Blog Interface
+  </footer>
+
+  <script>
+    function openBlog(url) {
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
+
